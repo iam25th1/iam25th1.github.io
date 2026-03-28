@@ -56,14 +56,18 @@ body::before {
 }
 #start-screen.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
 
-.start-pre {
-  font-family: 'Space Mono', monospace;
-  font-size: 0.65rem;
+.start-curiosity {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: clamp(0.95rem, 2.5vw, 1.2rem);
   color: var(--dim);
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  margin-bottom: 2.5rem;
-  opacity: 0; animation: fadeUp 0.8s 0.3s forwards;
+  margin-bottom: 3rem;
+  opacity: 0;
+  animation: fadeUp 1s 0.3s forwards;
+  text-align: center;
+  padding: 0 2rem;
+  max-width: 400px;
+  line-height: 1.7;
 }
 
 #start-btn {
@@ -74,8 +78,9 @@ body::before {
   background: transparent;
   cursor: pointer;
   display: flex; align-items: center; justify-content: center;
-  transition: all 0.4s ease;
-  opacity: 0; animation: fadeUp 0.8s 0.6s forwards;
+  opacity: 0;
+  animation: fadeUp 0.8s 1.4s forwards;
+  transition: border-color 0.4s ease, box-shadow 0.4s ease;
 }
 #start-btn::before {
   content: ''; position: absolute; inset: -5px;
@@ -85,8 +90,7 @@ body::before {
 }
 #start-btn:hover {
   border-color: var(--purple);
-  box-shadow: 0 0 50px rgba(124,80,255,0.12);
-  transform: scale(1.06);
+  box-shadow: 0 0 50px rgba(124,80,255,0.15);
 }
 #start-btn span {
   font-family: 'Space Mono', monospace;
@@ -98,7 +102,7 @@ body::before {
   font-family: 'Space Mono', monospace;
   font-size: 0.55rem; color: var(--dim);
   margin-top: 2rem;
-  opacity: 0; animation: fadeUp 0.8s 1s forwards;
+  opacity: 0; animation: fadeUp 0.8s 2s forwards;
 }
 
 /* ─── BOOT ─── */
@@ -219,7 +223,7 @@ body::before {
   font-family: 'Instrument Serif', serif;
   font-style: italic;
   font-size: clamp(1.1rem, 2.5vw, 1.4rem);
-  color: var(--dim);
+  color: #8a839e;
   line-height: 1.7;
   min-height: 2em;
 }
@@ -279,6 +283,11 @@ body::before {
   .hero-line { height: 50px; }
   .scroll-hint { bottom: 1.2rem; }
 
+  /* Start screen */
+  .start-curiosity { font-size: 0.9rem; margin-bottom: 1.5rem; padding: 0 1.5rem; }
+  #start-btn { width: 85px; height: 85px; }
+  #start-btn span { font-size: 0.5rem; }
+
   /* Boot */
   #boot-screen { padding: 1.5rem; font-size: 0.65rem; }
   .boot-line { margin-bottom: 0.3rem; word-break: break-word; }
@@ -334,6 +343,8 @@ body::before {
   .pinfo h3 { font-size: 1.25rem; }
   .inter-line { font-size: 0.95rem; }
   #boot-screen { font-size: 0.58rem; padding: 1rem; }
+  .start-curiosity { font-size: 0.82rem; }
+  #start-btn { width: 75px; height: 75px; }
 }
 
 /* Safe area for notched phones */
@@ -347,8 +358,8 @@ body::before {
   .proj:hover .mon { transform: none; box-shadow: 0 16px 50px rgba(0,0,0,0.5); }
   .proj:hover .mon .glow { opacity: 0; }
   .bot-card:hover { transform: none; border-color: var(--border); }
-  #start-btn:hover { transform: none; box-shadow: none; }
-  #start-btn { min-width: 44px; min-height: 44px; -webkit-tap-highlight-color: transparent; }
+  #start-btn:hover { box-shadow: none; border-color: rgba(124,80,255,0.25); }
+  #start-btn { -webkit-tap-highlight-color: transparent; min-height: 44px; }
   #voice-toggle { -webkit-tap-highlight-color: transparent; min-height: 44px; }
   .footer .sl { min-height: 44px; display: inline-flex; align-items: center; -webkit-tap-highlight-color: transparent; }
 }
@@ -598,6 +609,7 @@ body::before {
 
 /* ─── KEYFRAMES ─── */
 @keyframes fadeUp { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
+@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
 @keyframes blink { 50% { opacity:0; } }
 @keyframes pulseRing { 0% { transform:scale(1); opacity:1; } 100% { transform:scale(1.35); opacity:0; } }
 @keyframes bootIn { from { opacity:0; transform:translateX(-8px); } to { opacity:1; transform:translateX(0); } }
@@ -617,7 +629,7 @@ body::before {
 
 <!-- Start -->
 <div id="start-screen">
-  <div class="start-pre">portfolio runtime v2.5</div>
+  <div class="start-curiosity">What you're about to see shouldn't be possible.</div>
   <button id="start-btn" onclick="boot()"><span>Enter</span></button>
   <div class="start-hint">tap to begin</div>
 </div>
