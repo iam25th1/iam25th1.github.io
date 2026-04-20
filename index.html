@@ -328,6 +328,14 @@ body::before {
   /* Voice toggle */
   #voice-toggle { bottom: 1rem; right: 1rem; padding: 0.35rem 0.65rem; font-size: 0.5rem; }
 
+  /* Counter */
+  .visit-counter { top: 1rem; left: 1rem; padding: 0.3rem 0.6rem; }
+  .visit-counter .counter-label { font-size: 0.45rem; }
+  .visit-counter .counter-val { font-size: 0.75rem; }
+
+  /* Skip */
+  .start-skip { bottom: 1.5rem; right: 1.2rem; font-size: 0.45rem; }
+
   /* Footer */
   .footer { padding: 3.5rem 1.2rem; }
   .footer .outro { font-size: clamp(1.1rem, 4.5vw, 1.4rem); }
@@ -362,6 +370,8 @@ body::before {
   #start-btn { -webkit-tap-highlight-color: transparent; min-height: 44px; }
   #voice-toggle { -webkit-tap-highlight-color: transparent; min-height: 44px; }
   .footer .sl { min-height: 44px; display: inline-flex; align-items: center; -webkit-tap-highlight-color: transparent; }
+  .start-skip { -webkit-tap-highlight-color: transparent; min-height: 44px; }
+  .start-skip:hover { color: var(--dim); border-color: var(--border); }
 }
 
 /* Monitor */
@@ -580,20 +590,30 @@ body::before {
 
 
 
-/* ─── VISIT COUNTER ─── */
+/* ─── VISIT COUNTER (fixed top-left) ─── */
 .visit-counter {
-  display: flex; align-items: center; justify-content: center;
-  gap: 0.6rem;
-  margin-bottom: 2rem;
+  position: fixed;
+  top: 1.5rem; left: 1.5rem;
+  z-index: 800;
+  display: flex; align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.8rem;
+  background: rgba(10,10,13,0.9);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  backdrop-filter: blur(12px);
+  opacity: 0;
+  transition: opacity 0.4s ease;
 }
+.visit-counter.visible { opacity: 1; }
 .visit-counter .counter-label {
   font-family: 'Space Mono', monospace;
   font-size: 0.5rem; color: var(--dim);
-  letter-spacing: 0.15em; text-transform: uppercase;
+  letter-spacing: 0.12em; text-transform: uppercase;
 }
 .visit-counter .counter-val {
   font-family: 'Bricolage Grotesque', sans-serif;
-  font-weight: 700; font-size: 1.1rem;
+  font-weight: 700; font-size: 0.85rem;
   color: var(--accent);
   min-width: 2ch;
 }
@@ -607,6 +627,23 @@ body::before {
   0%, 100% { opacity: 0.6; transform: scale(1); }
   50% { opacity: 1; transform: scale(1.3); }
 }
+
+/* ─── SKIP BUTTON ─── */
+.start-skip {
+  position: absolute;
+  bottom: 2rem; right: 2rem;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.5rem; color: var(--dim);
+  letter-spacing: 0.15em; text-transform: uppercase;
+  background: none; border: 1px solid var(--border);
+  border-radius: 100px;
+  padding: 0.4rem 0.9rem;
+  cursor: pointer;
+  opacity: 0; animation: fadeUp 0.8s 2.5s forwards;
+  transition: color 0.3s ease, border-color 0.3s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.start-skip:hover { color: var(--accent); border-color: var(--accent); }
 
 /* Tool cards */
 .tool-card {
@@ -706,6 +743,13 @@ body::before {
 </head>
 <body>
 
+<!-- Visit Counter (fixed top-left) -->
+<div class="visit-counter" id="visit-counter">
+  <div class="counter-dot"></div>
+  <span class="counter-label">Visits</span>
+  <span class="counter-val" id="visit-count">...</span>
+</div>
+
 <!-- Voice Toggle (opt-in) -->
 <div id="voice-toggle" onclick="toggleVoice()">
   <div class="voice-dot"></div>
@@ -718,6 +762,7 @@ body::before {
   <div class="start-curiosity">What you're about to see shouldn't be possible.</div>
   <button id="start-btn" onclick="boot()"><span>Enter</span></button>
   <div class="start-hint">tap to begin</div>
+  <button class="start-skip" onclick="skipIntro()">skip intro</button>
 </div>
 
 <!-- Boot -->
@@ -785,11 +830,6 @@ body::before {
 
   <!-- Footer -->
   <section class="footer">
-    <div class="visit-counter">
-      <div class="counter-dot"></div>
-      <span class="counter-label">Total Visits</span>
-      <span class="counter-val" id="visit-count">...</span>
-    </div>
     <p class="outro"><em>"Every line of code here was <strong>spoken</strong> into existence."</em></p>
     <div class="links">
       <a href="https://x.com/25thprmr" target="_blank" class="sl">@25thprmr</a>
@@ -1107,12 +1147,24 @@ function boot() {
             inter.style.display = 'none';
             document.getElementById('main').classList.add('visible');
             document.getElementById('voice-toggle').classList.add('visible');
+            document.getElementById('visit-counter').classList.add('visible');
             initObservers();
           }, 1000);
         }, 800);
       });
     }, 700);
   }, 2800);
+}
+
+function skipIntro() {
+  document.getElementById('start-screen').classList.add('hidden');
+  document.getElementById('boot-screen').style.display = 'none';
+  document.getElementById('interstitial').style.display = 'none';
+  document.getElementById('main').classList.add('visible');
+  document.getElementById('voice-toggle').classList.add('visible');
+  document.getElementById('visit-counter').classList.add('visible');
+  if (window.speechSynthesis) window.speechSynthesis.getVoices();
+  initObservers();
 }
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
