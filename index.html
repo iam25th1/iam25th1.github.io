@@ -333,6 +333,13 @@ body::before {
   .visit-counter .counter-label { font-size: 0.45rem; }
   .visit-counter .counter-val { font-size: 0.75rem; }
 
+  /* Trophy */
+  .trophy-banner { padding: 0 1.2rem; margin-top: 2rem; }
+  .trophy-inner { padding: 0.8rem 1rem; gap: 0.7rem; }
+  .trophy-svg { width: 26px; height: 26px; }
+  .trophy-title { font-size: 0.85rem; }
+  .trophy-cat { font-size: 0.48rem; }
+
   /* Skip */
   .start-skip { bottom: 1.5rem; right: 1.2rem; font-size: 0.45rem; }
 
@@ -590,6 +597,86 @@ body::before {
 
 
 
+
+/* ─── TROPHY BANNER ─── */
+.trophy-banner {
+  max-width: 500px;
+  margin: 3rem auto 0;
+  padding: 0 2rem;
+  opacity: 0; transform: translateY(20px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.trophy-banner.vis { opacity: 1; transform: translateY(0); }
+.trophy-inner {
+  display: flex; align-items: center; gap: 1rem;
+  padding: 1rem 1.4rem;
+  background: linear-gradient(135deg, rgba(212,167,106,0.06), rgba(212,167,106,0.02));
+  border: 1px solid rgba(212,167,106,0.2);
+  border-radius: 10px;
+}
+.trophy-svg { flex-shrink: 0; filter: drop-shadow(0 0 8px rgba(212,167,106,0.3)); }
+.trophy-title {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 700; font-size: 0.95rem;
+  color: #D4A76A; display: block;
+}
+.trophy-cat {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.55rem; color: var(--dim);
+  letter-spacing: 0.12em; text-transform: uppercase;
+  display: block; margin-top: 0.15rem;
+}
+
+/* ─── DM LINK ─── */
+.pinfo .dim-lnk { opacity: 0.4; pointer-events: none; text-decoration: line-through; font-size: 0.55rem; }
+.pinfo .dm-lnk {
+  display: inline-flex; align-items: center; gap: 0.3rem;
+  margin-top: 0.4rem; margin-left: 0;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.6rem; color: var(--accent);
+  text-decoration: none; letter-spacing: 0.04em;
+  transition: color 0.3s ease;
+}
+.pinfo .dm-lnk:hover { color: var(--accent2); }
+.pinfo .dm-lnk::after { content: '\2197'; font-size: 0.8rem; }
+
+/* ─── WIP CARD ─── */
+.wip-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.2rem 1.4rem;
+  opacity: 0; transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease, border-color 0.3s ease;
+}
+.wip-card.vis { opacity: 1; transform: translateY(0); }
+.wip-card .wip-head {
+  display: flex; align-items: center; gap: 0.6rem;
+  margin-bottom: 0.7rem;
+}
+.wip-card .wip-icon {
+  width: 28px; height: 28px; border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  background: rgba(201,149,107,0.08);
+  border: 1px solid rgba(201,149,107,0.2);
+}
+.wip-card .wip-name {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 700; font-size: 0.95rem;
+}
+.wip-card .wip-desc {
+  font-size: 0.8rem; color: var(--dim);
+  line-height: 1.6; margin-bottom: 0.7rem;
+}
+.wip-card .wip-status {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.45rem; padding: 0.12rem 0.4rem;
+  border-radius: 100px;
+  border: 1px solid rgba(232,160,0,0.3);
+  color: var(--amber); letter-spacing: 0.06em;
+}
+
 /* ─── VISIT COUNTER (fixed top-left) ─── */
 .visit-counter {
   position: fixed;
@@ -816,6 +903,33 @@ body::before {
 
   <div class="bots-grid" id="bots-grid"></div>
 
+  <!-- Hackathon Win -->
+  <div class="trophy-banner" id="trophy-banner">
+    <div class="trophy-inner">
+      <svg class="trophy-svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+        <path d="M8 4h16v2h3a2 2 0 012 2v3c0 2.5-1.8 4.5-4 5-0.8 3.2-3.2 5.5-6 6.3V26h4a1 1 0 011 1v1H8v-1a1 1 0 011-1h4v-3.7c-2.8-0.8-5.2-3.1-6-6.3-2.2-0.5-4-2.5-4-5V8a2 2 0 012-2h3V4z" fill="#D4A76A"/>
+        <path d="M8 4h16v2h3a2 2 0 012 2v3c0 2.5-1.8 4.5-4 5-0.8 3.2-3.2 5.5-6 6.3V26h4a1 1 0 011 1v1H8v-1a1 1 0 011-1h4v-3.7c-2.8-0.8-5.2-3.1-6-6.3-2.2-0.5-4-2.5-4-5V8a2 2 0 012-2h3V4z" fill="url(#gold)" opacity="0.5"/>
+        <defs><linearGradient id="gold" x1="0" y1="0" x2="32" y2="32"><stop stop-color="#FFD700"/><stop offset="1" stop-color="#C9956B"/></linearGradient></defs>
+      </svg>
+      <div class="trophy-text">
+        <span class="trophy-title">Bags Hackathon Winner</span>
+        <span class="trophy-cat">BAGS API / AI Category</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Building in Progress -->
+  <div class="convo-intro" data-speak="And some things still being assembled. Work in progress, but the foundation is laid.">
+    <div class="speak"></div>
+  </div>
+
+  <div class="sec-head">
+    <div class="eye">// In Progress</div>
+    <h2>Currently Building</h2>
+  </div>
+
+  <div class="bots-grid" id="wip-grid"></div>
+
   <!-- Open Source Tools -->
   <div class="convo-intro" data-speak="And a couple of open source tools I built for the Claude community. Skills that shape how the AI behaves.">
     <div class="speak"></div>
@@ -846,6 +960,7 @@ body::before {
 const apps = [
   {
     name:'BagsBrain',
+    live:false,
     tag:'The Operating System for Bags Token Creators',
     tagColor:'#7C50FF',
     desc:'Full-stack analytics platform on Solana. Cap table intelligence, claim timing optimization, holder retention funnels, AI co-founder chat, and weekly reports for the Bags.fm ecosystem.',
@@ -863,6 +978,7 @@ const apps = [
   },
   {
     name:'PitchFire',
+    live:false,
     tag:'The AI That Argues Back',
     tagColor:'#FF6B35',
     desc:'Steelman your startup pitch in real time. Speak your pitch, defend weak claims against AI challenges, and generate a battle-hardened deck from only the arguments that survive.',
@@ -880,6 +996,7 @@ const apps = [
   },
   {
     name:'HireLoop',
+    live:false,
     tag:'Autonomous Recruitment Agent',
     tagColor:'#00D4AA',
     desc:'Describe the role. HireLoop searches, scores, writes outreach, and books interviews. Fully autonomously. AI-powered hiring pipeline with zero manual effort.',
@@ -895,6 +1012,7 @@ const apps = [
   },
   {
     name:'DebtFlow',
+    live:false,
     tag:'Autonomous Invoice Recovery Agent',
     tagColor:'#FF6B35',
     desc:'AI-powered agent that automates B2B invoice recovery. Automated outreach sequences, payment tracking, and escalation workflows. Fully autonomous debt collection.',
@@ -911,6 +1029,7 @@ const apps = [
   },
   {
     name:'SpeakTON',
+    live:false,
     tag:'Voice-First TON Blockchain Agent',
     tagColor:'#0088CC',
     desc:'Send a voice note in Telegram. SpeakTON transcribes it, understands the intent, executes on-chain actions on TON, and replies with a voice note. No commands, no friction.',
@@ -927,6 +1046,7 @@ const apps = [
   },
   {
     name:'Gimmicker',
+    live:false,
     tag:'The Streaming IDE for Prompt Engineers',
     tagColor:'#50C8FF',
     desc:'Stage & Backstage architecture. A private AI chat backstage, and a realistic fake IDE on stage that receives code via WebSocket and types it out with humanized animation for live audiences.',
@@ -938,7 +1058,70 @@ const apps = [
     mock:`<div style="background:#1a1b26;min-height:700px;display:flex"><div style="width:36px;background:#16161e;display:flex;flex-direction:column;align-items:center;padding:8px 0;gap:10px"><div style="width:16px;height:16px;background:#50C8FF;border-radius:3px;opacity:0.8"></div><div style="width:16px;height:16px;background:#3b3d57;border-radius:3px"></div><div style="width:16px;height:16px;background:#3b3d57;border-radius:3px"></div></div><div style="flex:1"><div style="display:flex;background:#16161e;padding:0 6px"><div style="padding:5px 10px;background:#1a1b26;border-radius:5px 5px 0 0;margin-top:3px"><div style="width:42px;height:3px;background:#50C8FF;border-radius:2px;opacity:0.7"></div></div><div style="padding:5px 10px;margin-top:3px"><div style="width:34px;height:3px;background:#3b3d57;border-radius:2px"></div></div></div><div style="padding:12px"><div style="display:flex;gap:6px;margin-bottom:4px"><div style="width:10px;height:3px;background:#3b3d57;border-radius:1px"></div><div style="height:3px;background:#bb9af7;border-radius:1px;width:35px"></div><div style="height:3px;background:#7aa2f7;border-radius:1px;width:50px"></div></div><div style="display:flex;gap:6px;margin-bottom:4px;padding-left:14px"><div style="height:3px;background:#9ece6a;border-radius:1px;width:42px"></div><div style="height:3px;background:#c0caf5;border-radius:1px;width:25px"></div></div><div style="display:flex;gap:6px;margin-bottom:4px;padding-left:14px"><div style="height:3px;background:#ff9e64;border-radius:1px;width:30px"></div><div style="height:3px;background:#c0caf5;border-radius:1px;width:48px"></div></div><div style="display:flex;gap:6px;margin-bottom:4px;padding-left:28px"><div style="height:3px;background:#7aa2f7;border-radius:1px;width:38px"></div><div style="height:3px;background:#e0af68;border-radius:1px;width:20px"></div></div><div style="display:flex;gap:6px;margin-bottom:4px;padding-left:28px"><div style="height:3px;background:#bb9af7;border-radius:1px;width:25px"></div><div style="height:3px;background:#c0caf5;border-radius:1px;width:56px"></div></div><div style="display:flex;gap:6px;margin-bottom:4px;padding-left:14px"><div style="height:3px;background:#565f89;border-radius:1px;width:58px"></div></div><div style="height:4px"></div><div style="display:flex;gap:6px;margin-bottom:4px"><div style="width:10px;height:3px;background:#3b3d57;border-radius:1px"></div><div style="height:3px;background:#bb9af7;border-radius:1px;width:48px"></div></div><div style="display:flex;gap:6px;margin-bottom:4px;padding-left:14px"><div style="height:3px;background:#9ece6a;border-radius:1px;width:34px"></div><div style="height:3px;background:#7aa2f7;border-radius:1px;width:42px"></div></div><div style="display:flex;gap:6px;margin-bottom:4px;padding-left:14px"><div style="height:3px;background:#f7768e;border-radius:1px;width:52px"></div></div></div><div style="border-top:1px solid #16161e;padding:6px 12px;display:flex;gap:3px;align-items:center"><div style="width:5px;height:5px;background:#50C8FF;border-radius:50%"></div><div style="width:85px;height:3px;background:#3b3d57;border-radius:1px"></div></div><div style="padding:10px 12px;border-top:1px solid #16161e"><div style="padding:7px;background:#16161e;border-radius:5px"><div style="display:flex;gap:5px;margin-bottom:6px"><div style="width:3px;height:3px;background:#50C8FF;border-radius:50%;margin-top:1px"></div><div style="height:3px;background:#c0caf5;border-radius:1px;width:75%"></div></div><div style="display:flex;gap:5px"><div style="width:3px;height:3px;background:#9ece6a;border-radius:50%;margin-top:1px"></div><div style="height:3px;background:#c0caf5;border-radius:1px;width:55%"></div></div></div></div></div></div>`
   },
   {
+    name:'SlugSlide',
+    tag:'Vibe Jam Racing Game',
+    tagColor:'#8BC34A',
+    desc:'Three.js racing game built for Vibe Jam 2026. Powerups, enemy combat, particle effects, leaderboards, multiplayer. Multiple tracks with distinct art styles and procedural terrain.',
+    url:'slugslide.25th.dev',
+    tech:[],
+    accent:'139,195,74',
+    live:true,
+    narration:'SlugSlide. A racing game built for Vibe Jam. Three.js, multiplayer, powerups, combat, leaderboards. Multiple tracks with unique art directions.',
+    mock:`<div style="background:#1a2e1a;min-height:700px;position:relative;overflow:hidden">
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 80%,rgba(100,180,60,0.12),transparent 65%);pointer-events:none"></div>
+      <div style="padding:10px 14px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #2a3e2a">
+        <div style="display:flex;align-items:center;gap:6px"><div style="width:20px;height:20px;background:#8BC34A;border-radius:50%"></div><div style="height:4px;background:#E8E4DD;border-radius:2px;width:60px"></div></div>
+        <div style="display:flex;gap:6px"><div style="padding:2px 8px;background:rgba(139,195,74,0.15);border:1px solid rgba(139,195,74,0.3);border-radius:4px"><div style="width:25px;height:3px;background:#8BC34A;border-radius:1px"></div></div></div>
+      </div>
+      <div style="padding:24px 14px;text-align:center">
+        <div style="height:10px;background:#E8E4DD;border-radius:4px;width:50%;margin:0 auto 6px"></div>
+        <div style="height:4px;background:#666;border-radius:2px;width:40%;margin:0 auto 20px"></div>
+        <div style="position:relative;height:140px;max-width:220px;margin:0 auto">
+          <div style="position:absolute;bottom:0;left:0;right:0;height:40px;background:linear-gradient(0deg,rgba(139,195,74,0.15),transparent);border-radius:0 0 12px 12px"></div>
+          <div style="position:absolute;bottom:8px;left:15%;width:24px;height:16px;background:#8BC34A;border-radius:12px 12px 4px 4px;box-shadow:0 2px 8px rgba(139,195,74,0.4)"></div>
+          <div style="position:absolute;bottom:8px;left:55%;width:18px;height:12px;background:#FF9F43;border-radius:10px 10px 3px 3px;box-shadow:0 2px 6px rgba(255,159,67,0.3)"></div>
+          <div style="position:absolute;bottom:8px;right:20%;width:20px;height:14px;background:#E03E3E;border-radius:10px 10px 3px 3px;box-shadow:0 2px 6px rgba(224,62,62,0.3)"></div>
+          <div style="position:absolute;top:20px;left:10%;width:35px;height:50px;background:rgba(60,100,40,0.4);border-radius:50% 50% 4px 4px"></div>
+          <div style="position:absolute;top:30px;right:15%;width:25px;height:40px;background:rgba(60,100,40,0.3);border-radius:50% 50% 4px 4px"></div>
+          <div style="position:absolute;bottom:0;left:0;right:0;height:8px;background:rgba(139,195,74,0.2);border-radius:0 0 12px 12px"></div>
+        </div>
+      </div>
+      <div style="padding:10px 14px;display:flex;gap:6px">
+        <div style="flex:1;background:rgba(139,195,74,0.06);border:1px solid rgba(139,195,74,0.12);border-radius:8px;padding:8px;text-align:center"><div style="height:3px;background:#8BC34A;border-radius:1px;width:45%;margin:0 auto 4px"></div><div style="height:5px;background:rgba(139,195,74,0.3);border-radius:2px;width:30%;margin:0 auto"></div></div>
+        <div style="flex:1;background:rgba(255,159,67,0.06);border:1px solid rgba(255,159,67,0.12);border-radius:8px;padding:8px;text-align:center"><div style="height:3px;background:#FF9F43;border-radius:1px;width:50%;margin:0 auto 4px"></div><div style="height:5px;background:rgba(255,159,67,0.3);border-radius:2px;width:25%;margin:0 auto"></div></div>
+      </div>
+    </div>`
+  },
+  {
+    name:'Callsheet',
+    tag:'Hackathon Prediction Platform',
+    tagColor:'#8B5CF6',
+    desc:'Prediction game for hackathons and contests. Users vote on which projects will win, earn points for accuracy. Multi-event support. Currently tracking Bags Hackathon, Colosseum, and Vibe Jam.',
+    url:'callsheet.25th.dev',
+    tech:[],
+    accent:'139,92,246',
+    live:true,
+    narration:'Callsheet. A prediction platform for hackathons. Users vote on which projects will win. Multi-event, tracking Bags Hackathon, Colosseum, Vibe Jam.',
+    mock:`<div style="background:#0f0d18;min-height:700px">
+      <div style="padding:10px 14px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #1e1a30">
+        <div style="display:flex;align-items:center;gap:6px"><div style="width:20px;height:20px;background:#8B5CF6;border-radius:5px"></div><div style="height:4px;background:#E8E4DD;border-radius:2px;width:55px"></div></div>
+        <div style="display:flex;gap:6px"><div style="height:3px;background:#8B5CF6;border-radius:2px;width:25px"></div><div style="height:3px;background:#444;border-radius:2px;width:25px"></div><div style="height:3px;background:#444;border-radius:2px;width:25px"></div></div>
+      </div>
+      <div style="padding:14px;display:flex;gap:6px;overflow:hidden">
+        <div style="padding:4px 10px;background:rgba(139,92,246,0.15);border:1px solid rgba(139,92,246,0.3);border-radius:100px;flex-shrink:0"><div style="width:40px;height:3px;background:#8B5CF6;border-radius:1px"></div></div>
+        <div style="padding:4px 10px;background:rgba(255,255,255,0.03);border:1px solid #1e1a30;border-radius:100px;flex-shrink:0"><div style="width:35px;height:3px;background:#666;border-radius:1px"></div></div>
+        <div style="padding:4px 10px;background:rgba(255,255,255,0.03);border:1px solid #1e1a30;border-radius:100px;flex-shrink:0"><div style="width:30px;height:3px;background:#666;border-radius:1px"></div></div>
+      </div>
+      <div style="padding:0 14px;display:flex;flex-direction:column;gap:8px">
+        <div style="background:#161225;border:1px solid #1e1a30;border-radius:10px;padding:12px"><div style="display:flex;justify-content:space-between;margin-bottom:8px"><div style="display:flex;align-items:center;gap:5px"><div style="width:14px;height:14px;background:rgba(139,92,246,0.2);border-radius:50%"></div><div style="height:4px;background:#E8E4DD;border-radius:2px;width:50px"></div></div><div style="padding:2px 6px;background:rgba(57,224,122,0.1);border:1px solid rgba(57,224,122,0.2);border-radius:100px"><div style="width:20px;height:3px;background:#39E07A;border-radius:1px"></div></div></div><div style="height:3px;background:#888;border-radius:1px;width:80%;margin-bottom:6px"></div><div style="display:flex;gap:4px"><div style="flex:1;height:22px;background:rgba(139,92,246,0.1);border:1px solid rgba(139,92,246,0.15);border-radius:4px"></div><div style="flex:1;height:22px;background:rgba(255,255,255,0.03);border:1px solid #1e1a30;border-radius:4px"></div></div></div>
+        <div style="background:#161225;border:1px solid #1e1a30;border-radius:10px;padding:12px"><div style="display:flex;justify-content:space-between;margin-bottom:8px"><div style="display:flex;align-items:center;gap:5px"><div style="width:14px;height:14px;background:rgba(255,159,67,0.2);border-radius:50%"></div><div style="height:4px;background:#E8E4DD;border-radius:2px;width:45px"></div></div><div style="padding:2px 6px;background:rgba(232,160,0,0.1);border:1px solid rgba(232,160,0,0.2);border-radius:100px"><div style="width:18px;height:3px;background:#E8A000;border-radius:1px"></div></div></div><div style="height:3px;background:#888;border-radius:1px;width:70%;margin-bottom:6px"></div><div style="display:flex;gap:4px"><div style="flex:1;height:22px;background:rgba(139,92,246,0.1);border:1px solid rgba(139,92,246,0.15);border-radius:4px"></div><div style="flex:1;height:22px;background:rgba(255,255,255,0.03);border:1px solid #1e1a30;border-radius:4px"></div></div></div>
+        <div style="background:#161225;border:1px solid #1e1a30;border-radius:10px;padding:12px"><div style="display:flex;justify-content:space-between;margin-bottom:8px"><div style="display:flex;align-items:center;gap:5px"><div style="width:14px;height:14px;background:rgba(224,62,62,0.2);border-radius:50%"></div><div style="height:4px;background:#E8E4DD;border-radius:2px;width:55px"></div></div><div style="padding:2px 6px;background:rgba(80,200,255,0.1);border:1px solid rgba(80,200,255,0.2);border-radius:100px"><div style="width:22px;height:3px;background:#50C8FF;border-radius:1px"></div></div></div><div style="height:3px;background:#888;border-radius:1px;width:75%;margin-bottom:6px"></div><div style="display:flex;gap:4px"><div style="flex:1;height:22px;background:rgba(255,255,255,0.03);border:1px solid #1e1a30;border-radius:4px"></div><div style="flex:1;height:22px;background:rgba(139,92,246,0.1);border:1px solid rgba(139,92,246,0.15);border-radius:4px"></div></div></div>
+      </div>
+    </div>`
+  },
+  {
     name:'Hopping Heads',
+    live:true,
     tag:'Browser Multiplayer Mayhem',
     tagColor:'#FF9F43',
     desc:'Real-time browser multiplayer game. Grow/Absorb mechanics, Fragment Fever, Shadow Form, King of the Hill, Last Head Hopping mode, NPC combat, and an interactive tutorial. Built with Three.js and Socket.io.',
@@ -979,6 +1162,7 @@ const apps = [
   },
   {
     name:'RUNLAID.exe',
+    live:true,
     tag:'22 Games. One Chrome Extension. Pure Satire.',
     tagColor:'#E03E3E',
     desc:'A satirical Chrome extension arcade with 22 shipped mini-games exploring the AI vs human workplace tension. Auto-launches during long AI sessions. Live on the Chrome Web Store. Fully open source.',
@@ -1041,6 +1225,10 @@ const bots = [
 const tools = [
   { name:'no-slop', repo:'https://github.com/iam25th1/no-slop', desc:'Claude skill that strips AI-slop behaviors from responses. Kills sycophancy, preamble, excessive hedging, unsolicited moralizing, over-structuring, and generic AI tics.', type:'Claude Skill', open:true },
   { name:'claude-360', repo:'https://github.com/iam25th1/claude-360', desc:'Run /360 to get a brutally honest performance review of your prompting skills. Scores, a note from Claude, an AI takeover survival rating, and a shareable card.', type:'Claude Skill', open:true },
+];
+
+const wip = [
+  { name:'CT City', desc:'Three.js open-world browser game set in a stylized Dubai. Phase 1: road network, district patches, procedural interiors, water shader, NPC framework. Multi-phase roadmap through island expansion, traffic systems, and multiplayer.', status:'Phase 1' },
 ];
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -1115,7 +1303,7 @@ function boot() {
 
   const lines = [
     { t:'> initializing portfolio runtime...', d:0 },
-    { t:'> loading project manifests [8 apps, 6 bots]', d:350 },
+    { t:'> loading project manifests [10 apps, 6 bots]', d:350 },
     { t:'> mounting live preview engines...', d:700 },
     { t:'> compiling build artifacts...', d:1050 },
     { t:'> voice synthesis module: standby', d:1400 },
@@ -1187,11 +1375,11 @@ function renderApps() {
         <div class="ref"></div>
       </div>
       <div class="pinfo">
-        <div class="num">0${i+1} / 08</div>
+        <div class="num">0${i+1} / 10</div>
         <h3>${p.name}</h3>
         <div class="tag" style="color:${p.tagColor}">${p.tag}</div>
         <p class="desc">${p.desc}</p>
-        ${p.url?`<a href="https://${p.url}" target="_blank" rel="noopener" class="lnk">Visit Live</a>`:''}
+        ${p.url && p.live?`<a href="https://${p.url}" target="_blank" rel="noopener" class="lnk">Visit Live</a>`:p.url?`<a href="https://${p.url}" target="_blank" rel="noopener" class="lnk dim-lnk">Visit Live</a><a href="https://x.com/messages/compose?recipient_id=25thprmr&text=Hey%2C%20I%20visited%2025th.dev%20and%20would%20love%20to%20see%20${encodeURIComponent(p.name)}%20live" target="_blank" rel="noopener" class="lnk dm-lnk">DM for live demo</a>`:''}
         ${badges}
       </div>`;
     c.appendChild(div);
@@ -1213,6 +1401,22 @@ function renderBots() {
       <div class="bot-meta">
         ${b.private?'<span class="bot-private">PRIVATE COMMISSION</span>':''}
       </div>`;
+    g.appendChild(div);
+  });
+}
+
+function renderWip() {
+  const g = document.getElementById('wip-grid');
+  wip.forEach(w=>{
+    const div = document.createElement('div');
+    div.className = 'wip-card';
+    div.innerHTML = `
+      <div class="wip-head">
+        <div class="wip-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#C9956B" stroke-width="2"><path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83"/></svg></div>
+        <div class="wip-name">${w.name}</div>
+      </div>
+      <div class="wip-desc">${w.desc}</div>
+      <span class="wip-status">${w.status}</span>`;
     g.appendChild(div);
   });
 }
@@ -1262,6 +1466,8 @@ function initObservers() {
   }, { threshold: 0.2 });
   document.querySelectorAll('.bot-card').forEach(b=>botObs.observe(b));
   document.querySelectorAll('.tool-card').forEach(t=>botObs.observe(t));
+  document.querySelectorAll('.wip-card').forEach(w=>botObs.observe(w));
+  const tb = document.getElementById('trophy-banner'); if(tb) botObs.observe(tb);
 
   // Conversational intros (typewriter on scroll)
   const convoObs = new IntersectionObserver(entries=>{
@@ -1314,6 +1520,7 @@ window.addEventListener('load', ()=>{
   }
   renderApps();
   renderBots();
+  renderWip();
   renderTools();
   initCounter();
 });
