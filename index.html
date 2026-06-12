@@ -101,9 +101,21 @@ body.light #boot-screen { color: #4A8A58; }
 body.light .boot-line.ok { color: #A06830; }
 body.light .hero h1 .g { background: linear-gradient(135deg, #A06830, #B07840, #557088); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 body.light .start-curiosity { color: #7A7268; }
-body.light .trophy-inner { background: linear-gradient(135deg, rgba(160,104,48,0.08), rgba(160,104,48,0.03)); border-color: rgba(160,104,48,0.25); }
+
 body.light .pinfo .dm-lnk { color: #A06830; }
 body.light .footer .sl:hover { color: #A06830; border-color: #A06830; }
+body.light .proj.winner-card .pinfo h3 {
+  background: linear-gradient(90deg, #8A5A20, #B8860B, #8A5A20, #6B4010, #B8860B, #8A5A20);
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+body.light .proj.winner-card .pinfo .tag { color: #8A5A20 !important; }
+body.light .proj.winner-card .pinfo .desc { color: #7A7268; }
+body.light .proj.winner-card .mon { border-color: rgba(138,90,32,0.25); box-shadow: 0 12px 40px rgba(0,0,0,0.1), 0 0 20px rgba(138,90,32,0.06); }
+body.light .winner-badge { background: linear-gradient(135deg, rgba(138,90,32,0.1), rgba(184,134,11,0.06)); border-color: rgba(138,90,32,0.3); }
+body.light .winner-badge span { background: linear-gradient(90deg, #8A5A20, #6B4010); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+body.light .proj.winner-card .mon .glow { border-color: rgba(138,90,32,0.25) !important; box-shadow: 0 0 20px rgba(138,90,32,0.06) !important; }
 
 /* ─── START SCREEN ─── */
 #start-screen {
@@ -394,13 +406,6 @@ body.light .footer .sl:hover { color: #A06830; border-color: #A06830; }
   .visit-counter { top: 1rem; left: 1rem; padding: 0.3rem 0.6rem; }
   .visit-counter .counter-label { font-size: 0.45rem; }
   .visit-counter .counter-val { font-size: 0.75rem; }
-
-  /* Trophy */
-  .trophy-banner { padding: 0 1.2rem; margin-top: 2rem; }
-  .trophy-inner { padding: 0.8rem 1rem; gap: 0.7rem; }
-  .trophy-svg { width: 26px; height: 26px; }
-  .trophy-title { font-size: 0.85rem; }
-  .trophy-cat { font-size: 0.48rem; }
 
   /* Skip */
   .start-skip { bottom: 1.5rem; right: 1.2rem; font-size: 0.45rem; }
@@ -693,20 +698,20 @@ body.light .footer .sl:hover { color: #A06830; border-color: #A06830; }
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  margin-left: 0.5rem;
-  padding: 0.15rem 0.5rem;
+  margin-left: 0.4rem;
+  padding: 0.1rem 0.4rem;
   background: linear-gradient(135deg, rgba(212,167,106,0.12), rgba(255,215,0,0.08));
   border: 1px solid rgba(212,167,106,0.3);
   border-radius: 100px;
   vertical-align: middle;
 }
 .winner-badge svg {
-  width: 11px; height: 11px;
+  width: 9px; height: 9px;
   filter: drop-shadow(0 0 3px rgba(255,215,0,0.4));
 }
 .winner-badge span {
   font-family: 'Space Mono', monospace;
-  font-size: 0.45rem;
+  font-size: 0.4rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   background: linear-gradient(90deg, #D4A76A, #FFD700);
@@ -718,34 +723,7 @@ body.light .footer .sl:hover { color: #A06830; border-color: #A06830; }
   100% { background-position: -100% 50%; }
 }
 
-/* ─── TROPHY BANNER ─── */
-.trophy-banner {
-  max-width: 500px;
-  margin: 3rem auto 0;
-  padding: 0 2rem;
-  opacity: 0; transform: translateY(20px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
-}
-.trophy-banner.vis { opacity: 1; transform: translateY(0); }
-.trophy-inner {
-  display: flex; align-items: center; gap: 1rem;
-  padding: 1rem 1.4rem;
-  background: linear-gradient(135deg, rgba(212,167,106,0.06), rgba(212,167,106,0.02));
-  border: 1px solid rgba(212,167,106,0.2);
-  border-radius: 10px;
-}
-.trophy-svg { flex-shrink: 0; filter: drop-shadow(0 0 8px rgba(212,167,106,0.3)); }
-.trophy-title {
-  font-family: 'Bricolage Grotesque', sans-serif;
-  font-weight: 700; font-size: 0.95rem;
-  color: #D4A76A; display: block;
-}
-.trophy-cat {
-  font-family: 'Space Mono', monospace;
-  font-size: 0.55rem; color: var(--dim);
-  letter-spacing: 0.12em; text-transform: uppercase;
-  display: block; margin-top: 0.15rem;
-}
+
 
 /* ─── DM LINK ─── */
 .pinfo .dim-lnk { opacity: 0.4; pointer-events: none; text-decoration: line-through; font-size: 0.55rem; }
@@ -1028,21 +1006,6 @@ body.light .footer .sl:hover { color: #A06830; border-color: #A06830; }
   </div>
 
   <div class="bots-grid" id="bots-grid"></div>
-
-  <!-- Hackathon Win -->
-  <div class="trophy-banner" id="trophy-banner">
-    <div class="trophy-inner">
-      <svg class="trophy-svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
-        <path d="M8 4h16v2h3a2 2 0 012 2v3c0 2.5-1.8 4.5-4 5-0.8 3.2-3.2 5.5-6 6.3V26h4a1 1 0 011 1v1H8v-1a1 1 0 011-1h4v-3.7c-2.8-0.8-5.2-3.1-6-6.3-2.2-0.5-4-2.5-4-5V8a2 2 0 012-2h3V4z" fill="#D4A76A"/>
-        <path d="M8 4h16v2h3a2 2 0 012 2v3c0 2.5-1.8 4.5-4 5-0.8 3.2-3.2 5.5-6 6.3V26h4a1 1 0 011 1v1H8v-1a1 1 0 011-1h4v-3.7c-2.8-0.8-5.2-3.1-6-6.3-2.2-0.5-4-2.5-4-5V8a2 2 0 012-2h3V4z" fill="url(#gold)" opacity="0.5"/>
-        <defs><linearGradient id="gold" x1="0" y1="0" x2="32" y2="32"><stop stop-color="#FFD700"/><stop offset="1" stop-color="#D4A57A"/></linearGradient></defs>
-      </svg>
-      <div class="trophy-text">
-        <span class="trophy-title">Bags Hackathon Winner</span>
-        <span class="trophy-cat">BAGS API / AI Category</span>
-      </div>
-    </div>
-  </div>
 
   <!-- Building in Progress -->
   <div class="convo-intro" data-speak="And some things still being assembled. Work in progress, but the foundation is laid.">
@@ -1628,7 +1591,6 @@ function initObservers() {
   document.querySelectorAll('.bot-card').forEach(b=>botObs.observe(b));
   document.querySelectorAll('.tool-card').forEach(t=>botObs.observe(t));
   document.querySelectorAll('.wip-card').forEach(w=>botObs.observe(w));
-  const tb = document.getElementById('trophy-banner'); if(tb) botObs.observe(tb);
 
   // Conversational intros (typewriter on scroll)
   const convoObs = new IntersectionObserver(entries=>{
