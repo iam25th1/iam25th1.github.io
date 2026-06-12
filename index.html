@@ -76,7 +76,7 @@ body.light ::selection { background: rgba(160,104,48,0.2); }
 
 /* ─── THEME TOGGLE ─── */
 #theme-toggle {
-  position: fixed; bottom: 1.5rem; right: 9rem; z-index: 800;
+  position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 800;
   width: 34px; height: 34px;
   display: flex; align-items: center; justify-content: center;
   background: var(--glass);
@@ -189,40 +189,6 @@ body.light .proj.winner-card .mon .glow { border-color: rgba(138,90,32,0.25) !im
 .boot-line.ok { color: #D4A76A; font-weight: 700; }
 .blink::after { content: '█'; animation: blink 0.7s step-end infinite; }
 
-/* ─── VOICE TOGGLE (opt-in) ─── */
-#voice-toggle {
-  position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 800;
-  display: flex; align-items: center; gap: 0.5rem;
-  padding: 0.4rem 0.8rem;
-  background: var(--glass);
-  border: 1px solid var(--border); border-radius: 100px;
-  font-family: 'Space Mono', monospace; font-size: 0.55rem;
-  color: var(--dim); letter-spacing: 0.1em; text-transform: uppercase;
-  cursor: pointer;
-  opacity: 0; transition: opacity 0.4s ease, border-color 0.3s ease;
-  backdrop-filter: blur(12px);
-  user-select: none;
-}
-#voice-toggle.visible { opacity: 1; }
-#voice-toggle:hover { border-color: rgba(212,165,122,0.3); }
-#voice-toggle.on { border-color: var(--accent); color: var(--accent); }
-#voice-toggle.on .voice-dot { background: #D4A57A; box-shadow: 0 0 6px var(--accent); }
-.voice-dot {
-  width: 5px; height: 5px; border-radius: 50%;
-  background: var(--dim); transition: all 0.3s ease;
-}
-.voice-bars-mini {
-  display: flex; align-items: center; gap: 1.5px; height: 10px;
-}
-.voice-bars-mini .vb {
-  width: 1.5px; height: 3px; background: var(--dim);
-  border-radius: 1px; transition: background 0.3s ease;
-}
-#voice-toggle.on .vb { background: #D4A57A; }
-#voice-toggle.speaking .vb:nth-child(1) { animation: vbar 0.35s 0s infinite alternate; }
-#voice-toggle.speaking .vb:nth-child(2) { animation: vbar 0.35s 0.08s infinite alternate; }
-#voice-toggle.speaking .vb:nth-child(3) { animation: vbar 0.35s 0.16s infinite alternate; }
-#voice-toggle.speaking .vb:nth-child(4) { animation: vbar 0.35s 0.12s infinite alternate; }
 
 /* ─── MAIN ─── */
 #main { opacity: 0; transition: opacity 1s ease; }
@@ -396,11 +362,8 @@ body.light .proj.winner-card .mon .glow { border-color: rgba(138,90,32,0.25) !im
   .bot-card .bot-desc { font-size: 0.75rem; }
   .bot-prompt { padding: 0 1.2rem; font-size: 0.5rem; }
 
-  /* Voice toggle */
-  #voice-toggle { bottom: 1rem; right: 1rem; padding: 0.35rem 0.65rem; font-size: 0.5rem; }
-
   /* Theme toggle */
-  #theme-toggle { bottom: 1rem; right: 6.5rem; width: 30px; height: 30px; }
+  #theme-toggle { bottom: 1rem; right: 1rem; width: 30px; height: 30px; }
 
   /* Counter */
   .visit-counter { top: 1rem; left: 1rem; padding: 0.3rem 0.6rem; }
@@ -432,7 +395,6 @@ body.light .proj.winner-card .mon .glow { border-color: rgba(138,90,32,0.25) !im
 /* Safe area for notched phones */
 @supports (padding: env(safe-area-inset-bottom)) {
   .footer { padding-bottom: calc(3.5rem + env(safe-area-inset-bottom)); }
-  #voice-toggle { bottom: calc(1rem + env(safe-area-inset-bottom)); }
 }
 
 /* Touch devices: disable hover transforms that cause sticky states */
@@ -442,7 +404,6 @@ body.light .proj.winner-card .mon .glow { border-color: rgba(138,90,32,0.25) !im
   .bot-card:hover { transform: none; border-color: var(--border); }
   #start-btn:hover { box-shadow: none; border-color: rgba(212,165,122,0.25); }
   #start-btn { -webkit-tap-highlight-color: transparent; min-height: 44px; }
-  #voice-toggle { -webkit-tap-highlight-color: transparent; min-height: 44px; }
   .footer .sl { min-height: 44px; display: inline-flex; align-items: center; -webkit-tap-highlight-color: transparent; }
   #theme-toggle { -webkit-tap-highlight-color: transparent; }
   #theme-toggle:hover { border-color: var(--border); }
@@ -940,13 +901,6 @@ body.light .proj.winner-card .mon .glow { border-color: rgba(138,90,32,0.25) !im
   <span class="counter-val" id="visit-count">...</span>
 </div>
 
-<!-- Voice Toggle (opt-in) -->
-<div id="voice-toggle" onclick="toggleVoice()">
-  <div class="voice-dot"></div>
-  <div class="voice-bars-mini"><div class="vb"></div><div class="vb"></div><div class="vb"></div><div class="vb"></div></div>
-  <span id="voice-label">VOICE OFF</span>
-</div>
-
 <!-- Start -->
 <div id="start-screen">
   <div class="start-curiosity">What you're about to see shouldn't be possible.</div>
@@ -1353,44 +1307,6 @@ function restoreTheme() {
 restoreTheme();
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// VOICE (opt-in)
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-let voiceOn = false;
-let spokenSet = new Set();
-
-function toggleVoice() {
-  voiceOn = !voiceOn;
-  const el = document.getElementById('voice-toggle');
-  const lbl = document.getElementById('voice-label');
-  if (voiceOn) {
-    el.classList.add('on');
-    lbl.textContent = 'VOICE ON';
-    if (window.speechSynthesis) window.speechSynthesis.getVoices();
-  } else {
-    el.classList.remove('on', 'speaking');
-    lbl.textContent = 'VOICE OFF';
-    if (window.speechSynthesis) window.speechSynthesis.cancel();
-  }
-}
-
-function speak(text) {
-  if (!voiceOn || !window.speechSynthesis) return;
-  window.speechSynthesis.cancel();
-  const u = new SpeechSynthesisUtterance(text);
-  u.rate = 0.95; u.pitch = 1.0; u.volume = 0.8;
-  const voices = window.speechSynthesis.getVoices();
-  const v = voices.find(v=>v.name.includes('Google UK English Male'))
-    || voices.find(v=>v.name.includes('Google')&&v.lang.startsWith('en'))
-    || voices.find(v=>v.lang.startsWith('en')&&!v.localService)
-    || voices.find(v=>v.lang.startsWith('en'));
-  if (v) u.voice = v;
-  const el = document.getElementById('voice-toggle');
-  u.onstart = () => el.classList.add('speaking');
-  u.onend = () => el.classList.remove('speaking');
-  window.speechSynthesis.speak(u);
-}
-
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // TYPEWRITER for conversational text
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 function typeText(el, text, speed = 28) {
@@ -1455,7 +1371,6 @@ function boot() {
           setTimeout(()=>{
             inter.style.display = 'none';
             document.getElementById('main').classList.add('visible');
-            document.getElementById('voice-toggle').classList.add('visible');
             document.getElementById('visit-counter').classList.add('visible');
             document.getElementById('theme-toggle').classList.add('visible');
             initObservers();
@@ -1471,7 +1386,6 @@ function skipIntro() {
   document.getElementById('boot-screen').style.display = 'none';
   document.getElementById('interstitial').style.display = 'none';
   document.getElementById('main').classList.add('visible');
-  document.getElementById('voice-toggle').classList.add('visible');
   document.getElementById('visit-counter').classList.add('visible');
   document.getElementById('theme-toggle').classList.add('visible');
   if (window.speechSynthesis) window.speechSynthesis.getVoices();
@@ -1573,11 +1487,7 @@ function initObservers() {
     entries.forEach(e=>{
       if (e.isIntersecting) {
         e.target.classList.add('vis');
-        const idx = parseInt(e.target.dataset.idx);
-        if (!isNaN(idx) && !spokenSet.has('app-'+idx)) {
-          spokenSet.add('app-'+idx);
-          speak(apps[idx].narration);
-        }
+
       }
     });
   }, { threshold: 0.25 });
