@@ -408,7 +408,7 @@ body.light .proj.winner-card .mon .glow { border-color: rgba(138,90,32,0.25) !im
   .visit-counter .counter-val { font-size: 0.75rem; }
 
   /* Skip */
-  .start-skip { bottom: 1.5rem; right: 1.2rem; font-size: 0.45rem; }
+  .start-skip { font-size: 0.45rem; }
 
   /* Footer */
   .footer { padding: 3.5rem 1.2rem; }
@@ -815,8 +815,6 @@ body.light .proj.winner-card .mon .glow { border-color: rgba(138,90,32,0.25) !im
 
 /* ─── SKIP BUTTON ─── */
 .start-skip {
-  position: absolute;
-  bottom: 2rem; right: 2rem;
   font-family: 'Space Mono', monospace;
   font-size: 0.5rem; color: var(--dim);
   letter-spacing: 0.15em; text-transform: uppercase;
@@ -824,6 +822,7 @@ body.light .proj.winner-card .mon .glow { border-color: rgba(138,90,32,0.25) !im
   border-radius: 100px;
   padding: 0.4rem 0.9rem;
   cursor: pointer;
+  margin-top: 0.8rem;
   opacity: 0; animation: fadeUp 0.8s 2.5s forwards;
   transition: color 0.3s ease, border-color 0.3s ease;
   -webkit-tap-highlight-color: transparent;
