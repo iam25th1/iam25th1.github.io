@@ -662,6 +662,62 @@ body.light .footer .sl:hover { color: #A06830; border-color: #A06830; }
 
 
 
+
+/* ─── WINNER CARD (BagsBrain) ─── */
+.proj.winner-card .mon {
+  border-color: rgba(212,167,106,0.3);
+  box-shadow: 0 16px 50px rgba(0,0,0,0.5), 0 0 30px rgba(212,167,106,0.08);
+}
+.proj.winner-card:hover .mon {
+  box-shadow: 0 24px 60px rgba(0,0,0,0.6), 0 0 40px rgba(212,167,106,0.12);
+}
+.proj.winner-card .pinfo h3 {
+  background: linear-gradient(90deg, #D4A76A, #FFD700, #D4A76A, #B8860B, #FFD700, #D4A76A);
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: goldShimmer 4s linear infinite;
+}
+.proj.winner-card .pinfo .tag {
+  color: #D4A76A !important;
+}
+.proj.winner-card .pinfo .desc {
+  color: #B0A89A;
+}
+.proj.winner-card .mon .glow {
+  border: 1px solid rgba(212,167,106,0.3) !important;
+  box-shadow: 0 0 25px rgba(212,167,106,0.1), inset 0 0 25px rgba(212,167,106,0.03) !important;
+  opacity: 0.5 !important;
+}
+.winner-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-left: 0.5rem;
+  padding: 0.15rem 0.5rem;
+  background: linear-gradient(135deg, rgba(212,167,106,0.12), rgba(255,215,0,0.08));
+  border: 1px solid rgba(212,167,106,0.3);
+  border-radius: 100px;
+  vertical-align: middle;
+}
+.winner-badge svg {
+  width: 11px; height: 11px;
+  filter: drop-shadow(0 0 3px rgba(255,215,0,0.4));
+}
+.winner-badge span {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.45rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, #D4A76A, #FFD700);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+@keyframes goldShimmer {
+  0% { background-position: 100% 50%; }
+  100% { background-position: -100% 50%; }
+}
+
 /* ─── TROPHY BANNER ─── */
 .trophy-banner {
   max-width: 500px;
@@ -1031,6 +1087,7 @@ const apps = [
   {
     name:'BagsBrain',
     live:true,
+    winner:true,
     tag:'The Operating System for Bags Token Creators',
     tagColor:'#7C50FF',
     desc:'Full-stack analytics platform on Solana. Cap table intelligence, claim timing optimization, holder retention funnels, AI co-founder chat, and weekly reports for the Bags.fm ecosystem.',
@@ -1192,10 +1249,10 @@ const apps = [
     tag:'A Cozy Life Inside a Snail Shell',
     tagColor:'#B8D4A8',
     desc:'Wavedash Spring Jam entry, theme: Shelter. You are a leaf-human living inside a giant snail shell. 7-day loop, day/night cycle, auto-weather, visitors who sit and chat, tidy mode, free-look camera. Ambient elven soundtrack.',
-    url:null,
+    url:'wavedash.com/games/driftshell',
     tech:[],
     accent:'184,212,168',
-    live:false,
+    live:true,
     hackathon:'Wavedash Spring Jam 2026',
     narration:'Driftshell. A cozy life sim inside a snail shell. Day-night cycle, weather, visitors, tidy mode. Built for Wavedash Spring Jam.',
     mock:`<div style="background:linear-gradient(180deg,#d4c4a0 0%,#b8a880 30%,#8a9a6a 100%);min-height:700px;position:relative;overflow:hidden"><div style="position:absolute;top:0;left:0;right:0;height:80px;background:linear-gradient(180deg,#e8d8b0,transparent);opacity:0.5"></div><div style="padding:10px 14px;display:flex;align-items:center;justify-content:space-between;position:relative;z-index:1"><div style="display:flex;align-items:center;gap:6px"><div style="width:18px;height:18px;background:rgba(100,80,60,0.3);border:1.5px solid rgba(100,80,60,0.5);border-radius:50%"></div><div style="height:4px;background:rgba(60,50,30,0.6);border-radius:2px;width:55px"></div></div><div style="display:flex;gap:8px"><div style="height:3px;background:rgba(60,50,30,0.3);border-radius:2px;width:20px"></div><div style="height:3px;background:rgba(60,50,30,0.3);border-radius:2px;width:20px"></div></div></div><div style="padding:20px 14px;text-align:center;position:relative;z-index:1"><div style="width:100px;height:80px;margin:0 auto 16px;position:relative"><div style="position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:80px;height:55px;background:radial-gradient(ellipse,#c4a870,#a08850);border-radius:60% 60% 40% 40%;border:1px solid rgba(80,60,30,0.2)"></div><div style="position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:30px;height:25px;background:radial-gradient(ellipse,#90b870,#70a050);border-radius:8px 8px 2px 2px"></div><div style="position:absolute;top:5px;left:50%;transform:translateX(-50%);width:50px;height:50px;background:conic-gradient(from 0deg,#c4a870,#a08850,#c4a870);border-radius:50%;border:1px solid rgba(80,60,30,0.2)"></div></div><div style="height:8px;background:rgba(60,50,30,0.5);border-radius:4px;width:45%;margin:0 auto 4px"></div><div style="height:4px;background:rgba(60,50,30,0.25);border-radius:2px;width:55%;margin:0 auto"></div></div><div style="padding:0 14px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;position:relative;z-index:1"><div style="background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:8px;text-align:center"><div style="width:16px;height:16px;background:rgba(232,200,100,0.3);border-radius:50%;margin:0 auto 4px"></div><div style="height:3px;background:rgba(60,50,30,0.4);border-radius:1px;width:60%;margin:0 auto"></div></div><div style="background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:8px;text-align:center"><div style="width:16px;height:16px;background:rgba(140,180,120,0.3);border-radius:50%;margin:0 auto 4px"></div><div style="height:3px;background:rgba(60,50,30,0.4);border-radius:1px;width:50%;margin:0 auto"></div></div><div style="background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:8px;text-align:center"><div style="width:16px;height:16px;background:rgba(180,160,120,0.3);border-radius:50%;margin:0 auto 4px"></div><div style="height:3px;background:rgba(60,50,30,0.4);border-radius:1px;width:55%;margin:0 auto"></div></div></div><div style="padding:14px;position:relative;z-index:1"><div style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:10px"><div style="height:3px;background:rgba(60,50,30,0.4);border-radius:1px;width:30%;margin-bottom:6px"></div><div style="display:flex;gap:6px"><div style="width:20px;height:20px;background:rgba(120,160,90,0.25);border-radius:50%"></div><div style="width:20px;height:20px;background:rgba(200,160,80,0.25);border-radius:50%"></div><div style="width:20px;height:20px;background:rgba(100,140,180,0.25);border-radius:50%"></div></div></div></div></div>`
@@ -1466,7 +1523,7 @@ function renderApps() {
   const c = document.getElementById('projects');
   apps.forEach((p,i)=>{
     const div = document.createElement('div');
-    div.className = 'proj';
+    div.className = 'proj' + (p.winner ? ' winner-card' : '');
     div.dataset.idx = i;
     let badges = '';
     if (p.hackathon) badges += `<div class="hackathon-badge">${p.hackathon}</div>`;
@@ -1480,7 +1537,7 @@ function renderApps() {
       </div>
       <div class="pinfo">
         <div class="num">0${i+1} / 12</div>
-        <h3>${p.name}</h3>
+        <h3>${p.name}${p.winner?'<span class="winner-badge"><svg viewBox="0 0 24 24" fill="#FFD700"><path d="M5 3h14l-1.5 5H6.5L5 3zm1.5 5h11L16 16h-1v4l-3-2-3 2v-4H8L6.5 8z"/></svg><span>WINNER</span></span>':''}</h3>
         <div class="tag" style="color:${p.tagColor}">${p.tag}</div>
         <p class="desc">${p.desc}</p>
         ${p.url && p.live?`<a href="https://${p.url}" target="_blank" rel="noopener" class="lnk">Visit Live</a>`:p.url?`<a href="https://${p.url}" target="_blank" rel="noopener" class="lnk dim-lnk">Visit Live</a><a href="https://x.com/messages/compose?recipient_id=25thprmr&text=Hey%2C%20I%20visited%2025th.dev%20and%20would%20love%20to%20see%20${encodeURIComponent(p.name)}%20live" target="_blank" rel="noopener" class="lnk dm-lnk">DM for live demo</a>`:''}
